@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body>
+<title>Repertório do Casamento</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=Figtree:wght@400..700&amp;display=swap">
+<style id="estilo">
+/* Layout: uma coluna estreita, como a folha de setlist presa no pedestal do microfone; cada bloco abre com uma pauta de cinco linhas e os momentos da cerimônia seguem numerados na ordem real. */
+:root {
+  --bg: #F3F4F7;
+  --surface: #FFFFFF;
+  --ink: #191C29;
+  --muted: #5B6074;
+  --line: #DFE1E9;
+  --line-forte: #C5C8D4;
+  --accent: #8B2E56;
+  --accent-soft: #F5E6ED;
+  --sobre-accent: #FFFFFF;
+  --pendente: #8A5A0B;
+  --pendente-fundo: #FCF3E1;
+  --perigo: #B42318;
+  --veu: rgba(17, 19, 30, 0.45);
+  --sombra: 0 10px 30px rgba(17, 19, 30, 0.14);
+  --fonte-titulo: "Bodoni Moda", "Bodoni 72", Didot, "Times New Roman", serif;
+  --fonte-texto: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10121A;
+    --surface: #191C27;
+    --ink: #ECEEF4;
+    --muted: #A2A7BA;
+    --line: #2A2E3D;
+    --line-forte: #3B4053;
+    --accent: #E68AAF;
+    --accent-soft: #3A2130;
+    --sobre-accent: #1A0F16;
+    --pendente: #E6B65A;
+    --pendente-fundo: #2E2617;
+    --perigo: #F2836F;
+    --veu: rgba(0, 0, 0, 0.62);
+    --sombra: 0 10px 30px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10121A;
+  --surface: #191C27;
+  --ink: #ECEEF4;
+  --muted: #A2A7BA;
+  --line: #2A2E3D;
+  --line-forte: #3B4053;
+  --accent: #E68AAF;
+  --accent-soft: #3A2130;
+  --sobre-accent: #1A0F16;
+  --pendente: #E6B65A;
+  --pendente-fundo: #2E2617;
+  --perigo: #F2836F;
+  --veu: rgba(0, 0, 0, 0.62);
+  --sombra: 0 10px 30px rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--fonte-texto);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+p, h1, h2, h3 { margin: 0; }
+a { color: inherit; }
+button { font: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+#app {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding-inline: 16px;
+  padding-block: 28px 120px;
+  display: grid;
+  gap: 28px;
+}
+@media (min-width: 640px) {
+  #app { padding-inline: 24px; padding-block: 56px 140px; }
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Cabeçalho */
+.topo { display: grid; gap: 12px; }
+h1 {
+  font-family: var(--fonte-titulo);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 8vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+h1 em { font-style: italic; color: var(--accent); }
+.meta { color: var(--muted); font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+.acoes { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
+.dica {
+  font-size: 0.92rem;
+  color: var(--ink);
+  background: var(--accent-soft);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+/* Botões */
+.botao {
+  appearance: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line-forte);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+.botao:hover { border-color: var(--ink); }
+.botao.primario { background: var(--accent); border-color: var(--accent); color: var(--sobre-accent); }
+.botao.primario:hover { filter: brightness(1.08); }
+.botao.ativo { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.botao:disabled { opacity: 0.5; cursor: default; }
+.botao-add {
+  justify-self: start;
+  margin-top: 10px;
+  border-style: dashed;
+  border-color: var(--accent);
+  color: var(--accent);
+  background: transparent;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+.mini {
+  appearance: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-forte);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.mini:hover:not(:disabled) { border-color: var(--ink); }
+.mini:disabled { opacity: 0.35; cursor: default; }
+.mini.perigo { background: var(--perigo); border-color: var(--perigo); color: var(--sobre-accent); }
+
+/* Roteiro */
+.roteiro ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.roteiro a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  text-decoration: none;
+  height: 100%;
+}
+.roteiro a:hover { border-color: var(--accent); }
+.roteiro-etapa { display: none; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.roteiro-titulo { font-family: var(--fonte-titulo); font-size: 1.2rem; font-weight: 500; line-height: 1.2; }
+.roteiro-resumo { font-size: 0.85rem; color: var(--muted); white-space: nowrap; }
+@media (min-width: 600px) {
+  .roteiro ol { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .roteiro a { display: grid; align-content: start; gap: 4px; }
+  .roteiro-etapa { display: block; }
+  .roteiro-resumo { white-space: normal; }
+}
+
+/* Seções */
+.secao { display: grid; gap: 16px; scroll-margin-top: 16px; }
+.pauta {
+  height: 17px;
+  background: repeating-linear-gradient(to bottom, var(--line-forte) 0 1px, transparent 1px 4px);
+}
+.secao-cabeca { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 10px 16px; }
+.secao-cabeca > div { display: grid; gap: 4px; }
+h2 {
+  font-family: var(--fonte-titulo);
+  font-weight: 500;
+  font-size: clamp(1.7rem, 6vw, 2.2rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+.etiquetas { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.etiqueta {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.nota {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.nota-rotulo {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.transicao {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1.5px dashed var(--line-forte);
+}
+
+/* Listas de músicas */
+.lista { display: grid; }
+.musicas { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.musica {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  column-gap: 8px;
+  row-gap: 8px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.sem-num { border-top: 0; }
+.sem-num .musica { grid-template-columns: minmax(0, 1fr); padding: 4px 0 8px; border-bottom: 0; }
+.musica.pendente { background: var(--pendente-fundo); margin-inline: -8px; padding-inline: 8px; border-radius: 8px; }
+.musica-num { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.85rem; padding-top: 0.2rem; }
+.musica-corpo { display: grid; gap: 4px; min-width: 0; }
+.musica-linha { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 10px; row-gap: 2px; }
+.musica-titulo { font-weight: 650; font-size: 1.1rem; line-height: 1.3; overflow-wrap: anywhere; }
+.musica-artista { color: var(--muted); overflow-wrap: anywhere; }
+.musica-obs { font-size: 0.95rem; color: var(--ink); overflow-wrap: anywhere; }
+.obs-rotulo { font-weight: 700; color: var(--accent); }
+.selos { display: flex; flex-wrap: wrap; gap: 6px; }
+.selo {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+.selo-pendente { border-color: var(--pendente); color: var(--pendente); }
+.controles { grid-column: -2 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
+
+.vaga {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding: 10px 14px;
+  border: 1.5px dashed var(--pendente);
+  border-radius: 10px;
+  background: var(--pendente-fundo);
+}
+.vaga-rotulo { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pendente); }
+
+/* Momentos da cerimônia */
+.momentos { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.momento {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.momento-num {
+  font-family: var(--fonte-titulo);
+  font-style: italic;
+  font-size: 2.1rem;
+  line-height: 0.9;
+  color: var(--accent);
+}
+.momento-corpo { display: grid; gap: 6px; min-width: 0; }
+.momento-nome {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rodape { color: var(--muted); font-size: 0.88rem; border-top: 1px solid var(--line); padding-top: 16px; }
+
+/* Barra de salvar */
+.barra {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  box-shadow: var(--sombra);
+}
+.barra-conteudo { max-width: 44rem; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.barra-texto { flex: 1 1 14rem; min-width: 0; font-size: 0.95rem; }
+.barra-texto.erro { color: var(--perigo); font-weight: 600; }
+.barra-botoes { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Janelas */
+.camada {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: var(--veu);
+  display: grid;
+  place-items: end center;
+  padding: 16px;
+  overflow-y: auto;
+}
+@media (min-width: 640px) { .camada { place-items: center; } }
+.painel {
+  width: 100%;
+  max-width: 32rem;
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 16px;
+  padding: 20px;
+  display: grid;
+  gap: 14px;
+  box-shadow: var(--sombra);
+}
+.painel h2 { font-size: 1.6rem; }
+.campo { display: grid; gap: 6px; }
+.campo label { font-weight: 600; font-size: 0.92rem; }
+.campo small { color: var(--muted); font-size: 0.82rem; }
+.campo input, .campo select, .campo textarea {
+  font: inherit;
+  font-size: 16px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line-forte);
+  background: var(--bg);
+  color: var(--ink);
+}
+.campo textarea { min-height: 6rem; resize: vertical; }
+.erro-form { color: var(--perigo); font-weight: 600; font-size: 0.92rem; }
+.painel-botoes { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+
+.aviso {
+  position: fixed;
+  z-index: 20;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(12px + env(safe-area-inset-top, 0px));
+  width: max-content;
+  max-width: min(30rem, calc(100% - 32px));
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.92rem;
+  font-weight: 500;
+  box-shadow: var(--sombra);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .aviso:not([hidden]) { animation: surgir 0.2s ease-out; }
+  @keyframes surgir { from { opacity: 0; transform: translate(-50%, -6px); } }
+}
+</style>
+<div id="app"></div>
+<script type="application/json" id="repertorio-dados">
+{
+  "titulo": "Repertório do Casamento",
+  "atualizadoEm": "2026-10-05",
+  "revisao": "inicial",
+  "secoes": [
+    {
+      "id": "chegada",
+      "etapa": "Antes da cerimônia",
+      "titulo": "Chegada dos convidados",
+      "etiquetas": ["Acústico", "Volume baixo (pp)"],
+      "obs": [
+        "Tocar tudo em versão acústica e num volume baixo, já que nesse momento a música é pano de fundo para as conversas."
+      ],
+      "transicao": "Quando o cerimonial avisar que faltam uns 5 minutos, encerrar e fazer uma breve pausa em silêncio antes da entrada dos padrinhos, para marcar o início da cerimônia.",
+      "numerada": true,
+      "listas": [
+        {
+          "id": "chegada-setlist",
+          "nome": "",
+          "musicas": [
+            { "id": "m01", "titulo": "Banana Pancakes", "artista": "Jack Johnson", "obs": "" },
+            { "id": "m02", "titulo": "Better Together", "artista": "Jack Johnson", "obs": "" },
+            { "id": "m03", "titulo": "Sunday Morning", "artista": "Maroon 5", "obs": "" },
+            { "id": "m04", "titulo": "In My Life", "artista": "The Beatles", "obs": "" },
+            { "id": "m05", "titulo": "Stubborn Love", "artista": "The Lumineers", "obs": "" },
+            { "id": "m06", "titulo": "Yellow", "artista": "Coldplay", "obs": "" },
+            { "id": "m07", "titulo": "Can't Take My Eyes Off You", "artista": "Frankie Valli", "obs": "Versão lenta" },
+            { "id": "m08", "titulo": "Wonderwall", "artista": "Oasis", "obs": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cerimonia",
+      "etapa": "Entradas e saída",
+      "titulo": "Cerimônia",
+      "etiquetas": [],
+      "obs": [],
+      "momentos": true,
+      "listas": [
+        {
+          "id": "padrinhos",
+          "nome": "Entrada dos padrinhos",
+          "musicas": [
+            { "id": "m09", "titulo": "Eu Juro", "artista": "Leandro e Leonardo", "obs": "" }
+          ]
+        },
+        {
+          "id": "noivo",
+          "nome": "Entrada do noivo",
+          "musicas": [
+            { "id": "m10", "titulo": "Can't Help Falling in Love", "artista": "Elvis Presley", "obs": "" }
+          ]
+        },
+        {
+          "id": "florista",
+          "nome": "Entrada da florista",
+          "musicas": [
+            { "id": "m11", "titulo": "Barbie e as 12 Bailarinas", "artista": "Trilha do filme", "obs": "Somente instrumental" }
+          ]
+        },
+        {
+          "id": "noiva",
+          "nome": "Entrada da noiva",
+          "musicas": []
+        },
+        {
+          "id": "aliancas",
+          "nome": "Entrada das alianças",
+          "musicas": [
+            { "id": "m12", "titulo": "When You Wish Upon a Star", "artista": "Pinóquio (Disney)", "obs": "Instrumental" }
+          ]
+        },
+        {
+          "id": "saida",
+          "nome": "Saída do casal",
+          "musicas": [
+            { "id": "m13", "titulo": "Marry You", "artista": "Bruno Mars", "obs": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restaurante",
+      "etapa": "Depois da cerimônia",
+      "titulo": "Restaurante",
+      "etiquetas": [],
+      "obs": [],
+      "numerada": true,
+      "listas": [
+        {
+          "id": "restaurante-setlist",
+          "nome": "",
+          "musicas": [
+            { "id": "m14", "titulo": "The Way You Look Tonight", "artista": "Frank Sinatra", "obs": "" },
+            { "id": "m15", "titulo": "Fly Me to the Moon", "artista": "Frank Sinatra", "obs": "" },
+            { "id": "m16", "titulo": "What a Wonderful World", "artista": "Louis Armstrong", "obs": "" },
+            { "id": "m17", "titulo": "Sparks", "artista": "Coldplay", "obs": "" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script id="logica">
+(() => {
+  'use strict';
+
+  const CHAVE_PENDENTES = 'repertorio-casamento:pendentes';
+  const CHAVE_EDITANDO = 'repertorio-casamento:editando';
+  const CHAVE_LOCAL = 'repertorio-casamento:lista';
+  const ERROS_SOMENTE_LEITURA = ['not_writer', 'not_granted', 'consent_required', 'capability_disabled', 'capability_removed', 'not_declared'];
+  const ERROS_SEM_RETENTATIVA = ERROS_SOMENTE_LEITURA.concat(['conflict', 'too_large', 'invalid_content', 'rate_limited', 'read_only_path', 'transform_error']);
+  const LINK_FONTES = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=Figtree:wght@400..700&amp;display=swap">';
+  const RESET_PADRAO = ':root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,sans-serif;background:#fafafa}img{max-width:100%}[hidden]{display:none!important}';
+  const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+
+  document.documentElement.lang = 'pt-BR';
+
+  const app = document.getElementById('app');
+  const temClaude = !!(window.claude && typeof window.claude.use === 'function');
+
+  let base = JSON.parse(document.getElementById('repertorio-dados').textContent);
+  let pendentes = [];
+  let modo = temClaude ? 'leitura' : 'local'; // leitura | compartilhado | local
+  let editando = false;
+  let artefato = null;
+  let salvando = false;
+  let erroSalvar = '';
+  let confirmarRemocao = null;
+  let janela = null; // {tipo: 'musica', listaId, musicaId, origem} | {tipo: 'texto', texto, origem}
+  let timerAviso = null;
+
+  /* ---------- armazenamento do navegador (pode falhar) ---------- */
+  function ler(tipo, chave) {
+    try {
+      const v = window[tipo].getItem(chave);
+      return v ? JSON.parse(v) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+  function gravar(tipo, chave, valor) {
+    try {
+      if (valor == null) window[tipo].removeItem(chave);
+      else window[tipo].setItem(chave, JSON.stringify(valor));
+    } catch (e) { /* sem armazenamento: segue sem lembrar */ }
+  }
+
+  /* ---------- utilidades ---------- */
+  function el(tag, props, ...filhos) {
+    const n = document.createElement(tag);
+    if (props) {
+      for (const [k, v] of Object.entries(props)) {
+        if (v == null || v === false) continue;
+        if (k === 'text') n.textContent = v;
+        else n.setAttribute(k, v === true ? '' : String(v));
+      }
+    }
+    for (const f of filhos.flat(Infinity)) {
+      if (f != null && f !== false) n.append(f);
+    }
+    return n;
+  }
+  const clonar = (o) => JSON.parse(JSON.stringify(o));
+  const novoId = (prefixo) => (prefixo || 'm') + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+  function hojeISO() {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function partesData(iso) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+    return m ? { a: +m[1], m: +m[2], d: +m[3] } : null;
+  }
+  function dataPorExtenso(iso) {
+    const p = partesData(iso);
+    return p ? p.d + ' de ' + MESES[p.m - 1] + ' de ' + p.a : '';
+  }
+  function dataCurta(iso) {
+    const p = partesData(iso);
+    return p ? String(p.d).padStart(2, '0') + '/' + String(p.m).padStart(2, '0') : '';
+  }
+  const plural = (n, um, varios) => n + ' ' + (n === 1 ? um : varios);
+
+  /* ---------- dados e alterações pendentes ---------- */
+  function todasAsListas(d) {
+    return d.secoes.flatMap((s) => s.listas);
+  }
+  function acharLista(d, id) {
+    return todasAsListas(d).find((l) => l.id === id) || null;
+  }
+  function acharMusica(d, id) {
+    for (const lista of todasAsListas(d)) {
+      const i = lista.musicas.findIndex((m) => m.id === id);
+      if (i >= 0) return { lista, indice: i, musica: lista.musicas[i] };
+    }
+    return null;
+  }
+  function aplicar(d, op) {
+    if (op.t === 'adicionar') {
+      if (acharMusica(d, op.musica.id)) return;
+      const lista = acharLista(d, op.lista);
+      if (lista) lista.musicas.push(clonar(op.musica));
+    } else if (op.t === 'editar') {
+      const r = acharMusica(d, op.id);
+      if (!r) return;
+      Object.assign(r.musica, op.campos);
+      const destino = acharLista(d, op.lista);
+      if (destino && destino !== r.lista) {
+        r.lista.musicas.splice(r.indice, 1);
+        destino.musicas.push(r.musica);
+      }
+    } else if (op.t === 'remover') {
+      const r = acharMusica(d, op.id);
+      if (r) r.lista.musicas.splice(r.indice, 1);
+    } else if (op.t === 'mover') {
+      const r = acharMusica(d, op.id);
+      if (!r) return;
+      const j = r.indice + op.direcao;
+      if (j < 0 || j >= r.lista.musicas.length) return;
+      const ms = r.lista.musicas;
+      [ms[r.indice], ms[j]] = [ms[j], ms[r.indice]];
+    }
+  }
+  function dadosAtuais() {
+    const d = clonar(base);
+    pendentes.forEach((op) => aplicar(d, op));
+    return d;
+  }
+  function idsPendentes() {
+    return new Set(pendentes.map((op) => (op.t === 'adicionar' ? op.musica.id : op.id)));
+  }
+  function contarMusicas(d) {
+    return todasAsListas(d).reduce((n, l) => n + l.musicas.length, 0);
+  }
+  function guardarPendentes() {
+    gravar('sessionStorage', CHAVE_PENDENTES, pendentes.length ? { pendentes } : null);
+  }
+  function registrar(op, mensagem) {
+    pendentes.push(op);
+    erroSalvar = '';
+    guardarPendentes();
+    render();
+    if (mensagem) avisar(mensagem);
+  }
+  const podeEditar = () => modo === 'local' || modo === 'compartilhado';
+  const emEdicao = () => editando && podeEditar();
+
+  /* ---------- texto para WhatsApp / e-mail ---------- */
+  function formatarMusica(m) {
+    return m.titulo + (m.artista ? ' – ' + m.artista : '') + (m.obs ? ' (obs.: ' + m.obs + ')' : '');
+  }
+  function textoParaCopiar(d) {
+    const linhas = ['*' + d.titulo.toUpperCase() + '*', 'Atualizado em ' + dataPorExtenso(d.atualizadoEm)];
+    for (const s of d.secoes) {
+      linhas.push('', '*' + s.titulo.toUpperCase() + '*');
+      if (s.etiquetas && s.etiquetas.length) linhas.push(s.etiquetas.join(' · '));
+      (s.obs || []).forEach((o) => linhas.push('Obs.: ' + o));
+      if (s.momentos) {
+        s.listas.forEach((l, i) => {
+          linhas.push((i + 1) + '. ' + l.nome + ': ' + (l.musicas.length ? l.musicas.map(formatarMusica).join(' / ') : 'a definir'));
+        });
+      } else {
+        s.listas[0].musicas.forEach((m, i) => linhas.push((i + 1) + '. ' + formatarMusica(m)));
+      }
+      if (s.transicao) linhas.push('', 'Transição: ' + s.transicao);
+    }
+    return linhas.join('\n');
+  }
+
+  /* ---------- montagem da página para publicar ---------- */
+  function resetDoEsqueleto() {
+    const estilos = document.head ? Array.from(document.head.querySelectorAll('style')) : [];
+    const reset = estilos.find((s) => /safe-area-inset/.test(s.textContent));
+    return reset ? reset.textContent : RESET_PADRAO;
+  }
+  function montarPagina(dados) {
+    const fecha = '</scr' + 'ipt>';
+    const css = document.getElementById('estilo').textContent;
+    const js = document.getElementById('logica').textContent;
+    const json = JSON.stringify(dados, null, 2).replace(/</g, '\\u003c');
+    const conteudo =
+      '<title>Repertório do Casamento</title>\n' +
+      LINK_FONTES + '\n' +
+      '<style id="estilo">' + css + '</style>\n' +
+      '<div id="app"></div>\n' +
+      '<script type="application/json" id="repertorio-dados">\n' + json + '\n' + fecha + '\n' +
+      '<script id="logica">' + js + fecha + '\n';
+    return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>' +
+      resetDoEsqueleto() + '</style></head><body>' + conteudo + '</body></html>';
+  }
+
+  /* ---------- salvar ---------- */
+  async function publicar(html) {
+    try {
+      return await artefato.publish(html);
+    } catch (e) {
+      if (e && ERROS_SEM_RETENTATIVA.includes(e.code)) throw e;
+      await esperar(800 + Math.random() * 1200);
+      return artefato.publish(html);
+    }
+  }
+
+  async function salvar() {
+    if (salvando || !pendentes.length || !podeEditar()) return;
+    const dados = dadosAtuais();
+    dados.revisao = novoId('r');
+    dados.atualizadoEm = hojeISO();
+
+    if (modo === 'local') {
+      gravar('localStorage', CHAVE_LOCAL, dados);
+      base = dados;
+      pendentes = [];
+      guardarPendentes();
+      render();
+      avisar('Salvo neste navegador.');
+      return;
+    }
+
+    salvando = true;
+    erroSalvar = '';
+    renderBarra();
+    gravar('sessionStorage', CHAVE_PENDENTES, { pendentes, revisao: dados.revisao });
+    try {
+      await publicar(montarPagina(dados));
+      base = dados;
+      pendentes = [];
+      salvando = false;
+      gravar('sessionStorage', CHAVE_PENDENTES, null);
+      render();
+      avisar('Salvo. Quem abrir o link já vê a lista nova.');
+    } catch (e) {
+      salvando = false;
+      const code = e && e.code;
+      if (code === 'conflict') {
+        avisar('Alguém salvou uma versão nova agora há pouco. A página vai recarregar e reaplicar suas alterações para você conferir.');
+        return;
+      }
+      gravar('sessionStorage', CHAVE_PENDENTES, { pendentes });
+      if (ERROS_SOMENTE_LEITURA.includes(code)) {
+        modo = 'leitura';
+        erroSalvar = 'Este link está aberto sem acesso de edição, então não dá para salvar aqui. Use “Copiar lista em texto” para enviar suas sugestões.';
+      } else if (code === 'rate_limited') {
+        erroSalvar = 'Foram muitas alterações salvas em sequência. Espere um minuto e toque em Salvar de novo.';
+      } else if (code === 'too_large') {
+        erroSalvar = 'A lista ficou grande demais para salvar. Encurte as observações mais longas e tente de novo.';
+      } else {
+        erroSalvar = 'Não foi possível salvar agora. Suas alterações continuam aqui; tente de novo em instantes.';
+      }
+      render();
+    }
+  }
+
+  function descartar() {
+    pendentes = [];
+    erroSalvar = '';
+    guardarPendentes();
+    render();
+    avisar('Alterações descartadas.');
+  }
+
+  /* ---------- renderização ---------- */
+  function cabecalho(d) {
+    const total = contarMusicas(d);
+    return el('header', { class: 'topo' },
+      el('p', { class: 'eyebrow' }, 'Setlist e observações para a cantora'),
+      el('h1', null, 'Repertório do ', el('em', null, 'Casamento')),
+      el('p', { class: 'meta' }, 'Atualizado em ' + dataPorExtenso(d.atualizadoEm) + ' · ' + plural(total, 'música', 'músicas')),
+      el('div', { class: 'acoes' },
+        el('button', { type: 'button', class: 'botao', 'data-acao': 'copiar' }, 'Copiar lista em texto'),
+        podeEditar()
+          ? el('button', {
+            type: 'button',
+            class: 'botao' + (emEdicao() ? ' ativo' : ' primario'),
+            'data-acao': 'alternar-edicao',
+            'aria-pressed': String(emEdicao())
+          }, emEdicao() ? 'Concluir edição' : 'Adicionar ou editar músicas')
+          : null
+      ),
+      emEdicao()
+        ? el('p', { class: 'dica' }, modo === 'local'
+          ? 'Modo de edição. Use “+ Adicionar música” em cada parte do roteiro. Aqui as alterações ficam salvas só neste navegador.'
+          : 'Modo de edição. Use “+ Adicionar música” em cada parte do roteiro. Nada muda para a cantora até você tocar em Salvar.')
+        : null
+    );
+  }
+
+  function resumoSecao(s) {
+    if (s.momentos) {
+      const vagas = s.listas.filter((l) => !l.musicas.length).length;
+      return plural(s.listas.length, 'momento', 'momentos') + (vagas ? ' · ' + vagas + ' a definir' : '');
+    }
+    return plural(s.listas[0].musicas.length, 'música', 'músicas');
+  }
+
+  function roteiro(d) {
+    return el('nav', { class: 'roteiro', 'aria-label': 'Roteiro' },
+      el('ol', null, d.secoes.map((s) => el('li', null,
+        el('a', { href: '#' + s.id },
+          el('span', { class: 'roteiro-etapa' }, s.etapa),
+          el('span', { class: 'roteiro-titulo' }, s.titulo),
+          el('span', { class: 'roteiro-resumo' }, resumoSecao(s))
+        )
+      )))
+    );
+  }
+
+  function controles(m, i, n) {
+    return el('div', { class: 'controles' },
+      el('button', { type: 'button', class: 'mini', 'data-acao': 'editar-musica', 'data-id': m.id, 'aria-label': 'Editar ' + m.titulo }, 'Editar'),
+      n > 1 ? el('button', { type: 'button', class: 'mini', 'data-acao': 'subir', 'data-id': m.id, disabled: i === 0, 'aria-label': 'Subir ' + m.titulo }, 'Subir') : null,
+      n > 1 ? el('button', { type: 'button', class: 'mini', 'data-acao': 'descer', 'data-id': m.id, disabled: i === n - 1, 'aria-label': 'Descer ' + m.titulo }, 'Descer') : null,
+      confirmarRemocao === m.id
+        ? el('button', { type: 'button', class: 'mini perigo', 'data-acao': 'remover', 'data-id': m.id }, 'Confirmar remoção')
+        : el('button', { type: 'button', class: 'mini', 'data-acao': 'pedir-remocao', 'data-id': m.id, 'aria-label': 'Remover ' + m.titulo }, 'Remover')
+    );
+  }
+
+  function musica(m, i, n, numerada, tocadas) {
+    const naoSalva = tocadas.has(m.id);
+    return el('li', { class: 'musica' + (naoSalva ? ' pendente' : '') },
+      numerada ? el('span', { class: 'musica-num', 'aria-hidden': 'true' }, String(i + 1).padStart(2, '0')) : null,
+      el('div', { class: 'musica-corpo' },
+        el('p', { class: 'musica-linha' },
+          el('span', { class: 'musica-titulo' }, m.titulo),
+          m.artista ? el('span', { class: 'musica-artista' }, m.artista) : null
+        ),
+        m.obs ? el('p', { class: 'musica-obs' }, el('span', { class: 'obs-rotulo' }, 'Obs.'), ' ', m.obs) : null,
+        (m.adicionadaEm || naoSalva)
+          ? el('p', { class: 'selos' },
+            m.adicionadaEm ? el('span', { class: 'selo' }, 'Adicionada em ' + dataCurta(m.adicionadaEm)) : null,
+            naoSalva ? el('span', { class: 'selo selo-pendente' }, 'Não salva') : null)
+          : null
+      ),
+      emEdicao() ? controles(m, i, n) : null
+    );
+  }
+
+  function listaMusicas(lista, numerada, tocadas) {
+    const ms = lista.musicas;
+    return el('div', { class: 'lista' },
+      ms.length
+        ? el(numerada ? 'ol' : 'ul', { class: 'musicas' + (numerada ? '' : ' sem-num') },
+          ms.map((m, i) => musica(m, i, ms.length, numerada, tocadas)))
+        : el('p', { class: 'vaga' }, el('span', { class: 'vaga-rotulo' }, 'A definir'), el('span', null, 'Música ainda não escolhida.')),
+      emEdicao()
+        ? el('button', { type: 'button', class: 'botao botao-add', 'data-acao': 'adicionar', 'data-lista': lista.id }, '+ Adicionar música')
+        : null
+    );
+  }
+
+  function secao(s, tocadas) {
+    return el('section', { class: 'secao', id: s.id, 'aria-labelledby': 't-' + s.id },
+      el('div', { class: 'pauta', 'aria-hidden': 'true' }),
+      el('div', { class: 'secao-cabeca' },
+        el('div', null, el('p', { class: 'eyebrow' }, s.etapa), el('h2', { id: 't-' + s.id }, s.titulo)),
+        s.etiquetas && s.etiquetas.length
+          ? el('ul', { class: 'etiquetas', 'aria-label': 'Indicações' }, s.etiquetas.map((t) => el('li', { class: 'etiqueta' }, t)))
+          : null
+      ),
+      s.obs && s.obs.length
+        ? el('div', { class: 'nota' }, el('p', { class: 'nota-rotulo' }, 'Obs.'), s.obs.map((o) => el('p', null, o)))
+        : null,
+      s.momentos
+        ? el('ol', { class: 'momentos' }, s.listas.map((l, i) => el('li', { class: 'momento' },
+          el('span', { class: 'momento-num', 'aria-hidden': 'true' }, String(i + 1)),
+          el('div', { class: 'momento-corpo' },
+            el('h3', { class: 'momento-nome' }, l.nome),
+            listaMusicas(l, false, tocadas)
+          )
+        )))
+        : listaMusicas(s.listas[0], !!s.numerada, tocadas),
+      s.transicao
+        ? el('div', { class: 'transicao' }, el('p', { class: 'nota-rotulo' }, 'Transição para a cerimônia'), el('p', null, s.transicao))
+        : null
+    );
+  }
+
+  function rodape() {
+    const texto = modo === 'local'
+      ? 'Modo local: as músicas adicionadas por aqui ficam salvas só neste navegador. Use “Copiar lista em texto” para enviar a lista.'
+      : modo === 'compartilhado'
+        ? 'As alterações salvas aparecem para todos que abrirem este link.'
+        : 'Para adicionar ou alterar músicas, os noivos abrem este link com acesso de edição.';
+    return el('footer', { class: 'rodape' }, el('p', null, texto));
+  }
+
+  const barra = el('div', { class: 'barra', hidden: true });
+  const camada = el('div', { class: 'camada', hidden: true });
+  const aviso = el('div', { class: 'aviso', role: 'status', 'aria-live': 'polite', hidden: true });
+  document.body.append(barra, camada, aviso);
+
+  function renderBarra() {
+    const n = pendentes.length;
+    barra.hidden = !(n || salvando);
+    if (barra.hidden) return;
+    const texto = salvando
+      ? 'Salvando…'
+      : erroSalvar || (plural(n, 'alteração não salva', 'alterações não salvas'));
+    barra.replaceChildren(el('div', { class: 'barra-conteudo' },
+      el('p', { class: 'barra-texto' + (erroSalvar && !salvando ? ' erro' : '') }, texto),
+      el('div', { class: 'barra-botoes' },
+        el('button', { type: 'button', class: 'botao', 'data-acao': 'descartar', disabled: salvando }, 'Descartar'),
+        podeEditar()
+          ? el('button', { type: 'button', class: 'botao primario', 'data-acao': 'salvar', disabled: salvando },
+            modo === 'local' ? 'Salvar neste navegador' : 'Salvar')
+          : null
+      )
+    ));
+  }
+
+  function chaveDoFoco() {
+    const a = document.activeElement;
+    if (!a || !a.dataset || !a.dataset.acao) return null;
+    return { acao: a.dataset.acao, id: a.dataset.id || '', lista: a.dataset.lista || '' };
+  }
+  function restaurarFoco(k) {
+    if (!k) return;
+    const acao = k.acao === 'pedir-remocao' ? 'remover' : k.acao;
+    let seletor = '[data-acao="' + acao + '"]';
+    if (k.id) seletor += '[data-id="' + CSS.escape(k.id) + '"]';
+    if (k.lista) seletor += '[data-lista="' + CSS.escape(k.lista) + '"]';
+    const alvo = document.querySelector(seletor);
+    if (alvo && !alvo.disabled) alvo.focus({ preventScroll: true });
+  }
+
+  function render() {
+    const foco = chaveDoFoco();
+    const d = dadosAtuais();
+    const tocadas = idsPendentes();
+    app.replaceChildren(
+      cabecalho(d),
+      roteiro(d),
+      ...d.secoes.map((s) => secao(s, tocadas)),
+      rodape()
+    );
+    renderBarra();
+    restaurarFoco(foco);
+  }
+
+  /* ---------- janelas: formulário e texto ---------- */
+  function abrirJanela(j) {
+    janela = Object.assign({ origem: document.activeElement }, j);
+    renderJanela();
+  }
+  function fecharJanela() {
+    const origem = janela && janela.origem;
+    janela = null;
+    renderJanela();
+    if (origem && document.contains(origem)) origem.focus();
+  }
+
+  function renderJanela() {
+    camada.hidden = !janela;
+    if (!janela) {
+      camada.replaceChildren();
+      return;
+    }
+    if (janela.tipo === 'texto') {
+      const area = el('textarea', { id: 'texto-lista', readonly: true, rows: 12 });
+      area.value = janela.texto;
+      camada.replaceChildren(el('div', { class: 'painel', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'titulo-janela' },
+        el('h2', { id: 'titulo-janela' }, 'Lista em texto'),
+        el('div', { class: 'campo' },
+          el('label', { for: 'texto-lista' }, 'O texto já está selecionado: copie e cole no WhatsApp ou no e-mail.'),
+          area
+        ),
+        el('div', { class: 'painel-botoes' },
+          el('button', { type: 'button', class: 'botao primario', 'data-acao': 'fechar-janela' }, 'Fechar')
+        )
+      ));
+      area.focus();
+      area.select();
+      return;
+    }
+
+    const d = dadosAtuais();
+    const existente = janela.musicaId ? acharMusica(d, janela.musicaId) : null;
+    const m = existente ? existente.musica : { titulo: '', artista: '', obs: '' };
+    const listaId = existente ? existente.lista.id : janela.listaId;
+
+    const select = el('select', { id: 'campo-lista', name: 'lista' },
+      d.secoes.map((s) => s.momentos
+        ? el('optgroup', { label: s.titulo }, s.listas.map((l) => el('option', { value: l.id }, l.nome)))
+        : el('option', { value: s.listas[0].id }, s.titulo))
+    );
+    select.value = listaId;
+    const titulo = el('input', { id: 'campo-titulo', name: 'titulo', type: 'text', maxlength: 120, autocomplete: 'off', required: true });
+    titulo.value = m.titulo;
+    const artista = el('input', { id: 'campo-artista', name: 'artista', type: 'text', maxlength: 120, autocomplete: 'off' });
+    artista.value = m.artista || '';
+    const obs = el('textarea', { id: 'campo-obs', name: 'obs', maxlength: 500, rows: 3 });
+    obs.value = m.obs || '';
+    const erro = el('p', { class: 'erro-form', role: 'alert', hidden: true });
+
+    const form = el('form', { class: 'painel', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'titulo-janela', novalidate: true },
+      el('h2', { id: 'titulo-janela' }, existente ? 'Editar música' : 'Adicionar música'),
+      el('div', { class: 'campo' }, el('label', { for: 'campo-lista' }, 'Onde tocar'), select),
+      el('div', { class: 'campo' }, el('label', { for: 'campo-titulo' }, 'Música'), titulo),
+      el('div', { class: 'campo' },
+        el('label', { for: 'campo-artista' }, 'Artista ou versão'),
+        artista,
+        el('small', null, 'Ex.: Coldplay, versão do filme, versão ao vivo')
+      ),
+      el('div', { class: 'campo' },
+        el('label', { for: 'campo-obs' }, 'Observações para a cantora'),
+        obs,
+        el('small', null, 'Ex.: só instrumental, versão lenta, começar no refrão')
+      ),
+      erro,
+      el('div', { class: 'painel-botoes' },
+        el('button', { type: 'button', class: 'botao', 'data-acao': 'fechar-janela' }, 'Cancelar'),
+        el('button', { type: 'submit', class: 'botao primario' }, existente ? 'Guardar alteração' : 'Adicionar à lista')
+      )
+    );
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const campos = { titulo: titulo.value.trim(), artista: artista.value.trim(), obs: obs.value.trim() };
+      if (!campos.titulo) {
+        erro.textContent = 'Escreva o nome da música.';
+        erro.hidden = false;
+        titulo.focus();
+        return;
+      }
+      const lista = select.value;
+      const nomeLista = acharLista(d, lista);
+      const destino = nomeLista && nomeLista.nome ? nomeLista.nome : (d.secoes.find((s) => s.listas[0].id === lista) || {}).titulo;
+      janela = null;
+      renderJanela();
+      if (existente) {
+        registrar({ t: 'editar', id: existente.musica.id, lista, campos }, '“' + campos.titulo + '” foi alterada. Toque em Salvar para confirmar.');
+      } else {
+        registrar(
+          { t: 'adicionar', lista, musica: Object.assign({ id: novoId('m') }, campos, { adicionadaEm: hojeISO() }) },
+          '“' + campos.titulo + '” entrou em ' + destino + '. Toque em Salvar para confirmar.'
+        );
+      }
+    });
+    camada.replaceChildren(form);
+    titulo.focus();
+  }
+
+  camada.addEventListener('click', (e) => {
+    if (e.target === camada) fecharJanela();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && janela) fecharJanela();
+  });
+
+  /* ---------- copiar ---------- */
+  function copiar() {
+    const texto = textoParaCopiar(dadosAtuais());
+    let promessa;
+    try {
+      promessa = navigator.clipboard.writeText(texto);
+    } catch (e) {
+      promessa = Promise.reject(e);
+    }
+    promessa.then(
+      () => avisar('Lista copiada. Cole no WhatsApp ou no e-mail.'),
+      () => abrirJanela({ tipo: 'texto', texto })
+    );
+  }
+
+  function avisar(texto) {
+    aviso.textContent = texto;
+    aviso.hidden = false;
+    clearTimeout(timerAviso);
+    timerAviso = setTimeout(() => { aviso.hidden = true; }, 6000);
+  }
+
+  /* ---------- cliques ---------- */
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-acao]');
+    if (!b || b.disabled) return;
+    const acao = b.dataset.acao;
+    const id = b.dataset.id;
+    if (acao !== 'remover') confirmarRemocao = null;
+
+    switch (acao) {
+      case 'copiar':
+        copiar();
+        render();
+        break;
+      case 'alternar-edicao':
+        editando = !emEdicao();
+        gravar('sessionStorage', CHAVE_EDITANDO, editando);
+        render();
+        break;
+      case 'adicionar':
+        abrirJanela({ tipo: 'musica', listaId: b.dataset.lista, musicaId: null });
+        break;
+      case 'editar-musica':
+        abrirJanela({ tipo: 'musica', listaId: null, musicaId: id });
+        break;
+      case 'subir':
+      case 'descer':
+        registrar({ t: 'mover', id, direcao: acao === 'subir' ? -1 : 1 });
+        break;
+      case 'pedir-remocao':
+        confirmarRemocao = id;
+        render();
+        break;
+      case 'remover': {
+        const r = acharMusica(dadosAtuais(), id);
+        confirmarRemocao = null;
+        if (r) registrar({ t: 'remover', id }, '“' + r.musica.titulo + '” saiu da lista. Toque em Salvar para confirmar.');
+        break;
+      }
+      case 'salvar':
+        salvar();
+        break;
+      case 'descartar':
+        descartar();
+        break;
+      case 'fechar-janela':
+        fecharJanela();
+        break;
+    }
+  });
+
+  /* ---------- início ---------- */
+  if (modo === 'local') {
+    const salvo = ler('localStorage', CHAVE_LOCAL);
+    if (salvo && Array.isArray(salvo.secoes)) base = salvo;
+  }
+
+  let avisoInicial = '';
+  const guardado = ler('sessionStorage', CHAVE_PENDENTES);
+  if (guardado && Array.isArray(guardado.pendentes)) {
+    if (guardado.revisao && guardado.revisao === base.revisao) {
+      gravar('sessionStorage', CHAVE_PENDENTES, null);
+      avisoInicial = 'Alterações salvas.';
+    } else {
+      pendentes = guardado.pendentes;
+      if (guardado.revisao) {
+        avisoInicial = 'Uma versão mais nova da lista foi carregada antes de salvar. Suas alterações foram reaplicadas: confira e toque em Salvar.';
+      }
+    }
+  }
+  editando = ler('sessionStorage', CHAVE_EDITANDO) === true;
+
+  render();
+  if (avisoInicial) avisar(avisoInicial);
+
+  async function conectar() {
+    let ns = null;
+    try { ns = await window.claude.use('artifact'); } catch (e) { ns = null; }
+    if (!ns) return;
+    let usuario = null;
+    try { usuario = await window.claude.use('user'); } catch (e) { usuario = null; }
+    if (usuario) {
+      try {
+        if ((await usuario.canEdit()) === false) return;
+      } catch (e) { /* sem resposta: deixa o salvar decidir */ }
+    }
+    artefato = ns;
+    modo = 'compartilhado';
+    render();
+  }
+  if (temClaude) conectar();
+})();
+</script>
+</body>
+</html>
