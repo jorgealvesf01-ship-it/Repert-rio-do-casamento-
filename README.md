@@ -5,7 +5,7 @@ Página única (`index.html`) com o setlist do casamento e as observações de e
 ## O que tem na página
 
 - **Chegada dos convidados**: setlist numerado, com a indicação de tocar tudo acústico e em volume baixo, e a transição para a cerimônia (encerrar quando o cerimonial avisar dos 5 minutos e fazer uma pausa em silêncio).
-- **Cerimônia**: os sete momentos na ordem (padrinhos, noivo, florista, noiva, alianças, assinaturas, saída do casal), cada um com a música e as observações. Os momentos ainda sem música (entrada da noiva e assinaturas) aparecem como "A definir" até alguém escolher.
+- **Cerimônia**: os oito momentos na ordem (padrinhos, pais, noivo, florista, noiva, alianças, assinaturas, saída do casal), cada um com a música e as observações. Os momentos ainda sem música (entrada dos pais e assinaturas) aparecem como "A definir" até alguém escolher.
 - **Restaurante**: setlist numerado.
 - **Copiar lista em texto**: copia tudo, já formatado, para colar no WhatsApp ou no e-mail.
 
